@@ -16,12 +16,12 @@ resource "aws_security_group" "web_sg" {
 }
 
 resource "aws_security_group_rule" "web_in_http" {
-  security_group_id = aws_security_group.web_sg.id         # [必須] 上記で作成したセキュリティグループのIDを指定
-  type              = "ingress"                            # [必須] ingress=インバウンド通信、egress=アウトバウンド通信
-  protocol          = "tcp"                                # [必須] tcp, udp, icmpなどを指定
-  from_port         = 80                                   # [必須] 開始時のポート番号
-  to_port           = 80                                   # [必須] 終了時のポート番号
-  cidr_blocks       = ["0.0.0.0/0"]                        # [任意] CIDRを指定
+  security_group_id = aws_security_group.web_sg.id # [必須] 上記で作成したセキュリティグループのIDを指定
+  type              = "ingress"                    # [必須] ingress=インバウンド通信、egress=アウトバウンド通信
+  protocol          = "tcp"                        # [必須] tcp, udp, icmpなどを指定
+  from_port         = 80                           # [必須] 開始時のポート番号
+  to_port           = 80                           # [必須] 終了時のポート番号
+  cidr_blocks       = ["0.0.0.0/0"]                # [任意] CIDRを指定
 }
 
 resource "aws_security_group_rule" "web_in_https" {
@@ -39,7 +39,7 @@ resource "aws_security_group_rule" "web_out_tcp3000" {
   protocol                 = "tcp"
   from_port                = 3000
   to_port                  = 3000
-  source_security_group_id = aws_security_group.app_sg.id  # [任意] アクセスを許可したいセキュリティグループのIDを指定
+  source_security_group_id = aws_security_group.app_sg.id # [任意] アクセスを許可したいセキュリティグループのIDを指定
 }
 
 # app security group
