@@ -133,13 +133,13 @@ resource "aws_internet_gateway" "igw" {
 
   tags = {
     Name    = "${var.project}-${var.environment}-igw"
-    Project = var.project                                 # アタッチするVPCを指定
+    Project = var.project
     Env     = var.environment
   }
 }
 
 resource "aws_route" "public_rt_igw_r" {
-  route_table_id         = aws_route_table.public_rt.id   # 紐づけるルートテーブル（パブリック）を指定
-  destination_cidr_block = "0.0.0.0/0"                    # 送信先を指定（0.0.0.0/0 => 外部に出ていく通信を全て許可 ※どこにでも出て良い）
-  gateway_id             = aws_internet_gateway.igw.id    # 紐づけるインターネットゲートウェイ（すぐ上で作成したもの）を指定
+  route_table_id         = aws_route_table.public_rt.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = aws_internet_gateway.igw.id
 }
