@@ -15,7 +15,7 @@ terraform {
 # Provider
 # ---------------------------
 provider "aws" {
-  profile = "terraform"
+  profile = "teraform_user"
   region  = "ap-northeast-1"
 }
 
@@ -28,4 +28,21 @@ variable "project" {
 
 variable "environment" {
   type = string
+}
+
+# ---------------------------
+# VPC
+# ---------------------------
+resource "aws_vpc" "vpc" {
+  cidr_block                       = "192.168.0.0/20"
+  instance_tenancy                 = "default"
+  enable_dns_support               = true
+  enable_dns_hostnames             = true
+  assign_generated_ipv6_cidr_block = false
+
+  tags = {
+    Name    = "${var.project}-${var.environment}-vpc"
+    Project = var.project
+    Env     = var.environment
+  }
 }
