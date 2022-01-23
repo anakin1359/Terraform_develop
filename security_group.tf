@@ -71,7 +71,7 @@ resource "aws_security_group_rule" "web_out_http" {
   protocol          = "tcp"
   from_port         = 80
   to_port           = 80
-  prefix_list_ids   = [data.aws_prefix_list.s3_pl.id]        # data.tfで定義したS3のプレフィックスリストを取得する ※動的に変わるため「prefix_list_ids」で定義
+  prefix_list_ids   = [data.aws_prefix_list.s3_pl.id] # data.tfで定義したS3のプレフィックスリストを取得する ※動的に変わるため「prefix_list_ids」で定義
 }
 
 resource "aws_security_group_rule" "web_out_https" {
