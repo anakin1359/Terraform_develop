@@ -30,8 +30,6 @@ resource "aws_db_option_group" "mysql_standalone_optiongroup" {
 # ---------------------------
 resource "aws_db_subnet_group" "mysql_standalone_subnetgroup" {
   name = "${var.project}-${var.environment}-mysql-standalone-subnetgroup"
-
-  # network.tfで定義した「プライベートサブネット」を2つを指定
   subnet_ids = [
     aws_subnet.private_subnet_1a.id,
     aws_subnet.private_subnet_1c.id
@@ -42,4 +40,12 @@ resource "aws_db_subnet_group" "mysql_standalone_subnetgroup" {
     Project = var.project
     Env     = var.environment
   }
+}
+
+# ---------------------------
+# RDS instance
+# ---------------------------
+resource "random_string" "db_password" {
+  length  = 16
+  special = false
 }
