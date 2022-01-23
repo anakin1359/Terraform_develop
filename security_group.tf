@@ -55,7 +55,6 @@ resource "aws_security_group" "app_sg" {
   }
 }
 
-# 保留にしていたapp serverのセキュリティグループルールを定義
 resource "aws_security_group_rule" "app_in_tcp3000" {
   security_group_id        = aws_security_group.app_sg.id
   type                     = "ingress"
@@ -71,7 +70,7 @@ resource "aws_security_group_rule" "web_out_http" {
   protocol          = "tcp"
   from_port         = 80
   to_port           = 80
-  prefix_list_ids   = [data.aws_prefix_list.s3_pl.id] # data.tfで定義したS3のプレフィックスリストを取得する ※動的に変わるため「prefix_list_ids」で定義
+  prefix_list_ids   = [data.aws_prefix_list.s3_pl.id]
 }
 
 resource "aws_security_group_rule" "web_out_https" {

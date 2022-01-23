@@ -3,17 +3,24 @@
 # ---------------------------
 resource "aws_db_parameter_group" "mysql_standalone_parametergroup" {
   name   = "${var.project}-${var.environment}-mysql-standalone-parametergroup"
-  family = "mysql8.0"                                                            # MySQLの種類を指定
+  family = "mysql8.0"
 
-  # データベース用のパラメータグループを設定
   parameter {
     name  = "character_set_database"
     value = "utf8mb4"
   }
 
-  # サーバ用のパラメータグループを設定
   parameter {
     name  = "character_set_server"
     value = "utf8mb4"
   }
+}
+
+# ---------------------------
+# RDS option group
+# ---------------------------
+resource "aws_db_option_group" "mysql_standalone_optiongroup" {
+  name                 = "${var.project}-${var.environment}-mysql-standalone-optiongroup"
+  engine_name          = "mysql"                                                             # [必須] 関連付けるエンジン名を指定
+  major_engine_version = "8.0"                                                               # [任意] 上記エンジンのverを指定
 }
