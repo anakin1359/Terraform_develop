@@ -86,9 +86,9 @@ resource "aws_db_instance" "mysql_standalone" {
   auto_minor_version_upgrade = false
 
   # 6. 削除防止設定(通常時)
-  deletion_protection = true                                                           # 削除防止を行う
-  skip_final_snapshot = false                                                          # 削除時のスナップショットをスキップしない（スナップショットを取得する）
-  apply_immediately   = true                                                           # 削除実行時に即時反映させる
+  deletion_protection = true  # 削除防止を行う
+  skip_final_snapshot = false # 削除時のスナップショットをスキップしない（スナップショットを取得する）
+  apply_immediately   = true  # 削除実行時に即時反映させる
 
   # # 6. 削除防止設定(削除時)
   # deletion_protection = false                                                        # 削除防止を行わない
