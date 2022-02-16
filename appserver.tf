@@ -38,3 +38,9 @@ resource "aws_instance" "app_server" {
     Type    = "app" # 環境変数として読み込ませるための設定
   }
 }
+
+# # 4. terraform import コマンド検証用インスタンス（検証後削除）
+# resource "aws_instance" "test" {
+#   ami           = "ami-08a8688fb7eacb171"
+#   instance_type = "t2.micro"
+# }
