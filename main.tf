@@ -9,6 +9,12 @@ terraform {
       version = "~>3.0"
     }
   }
+  backend "s3" {
+    bucket  = "tastylog-tfstat-bucket-anakin1359" # S3バケットに設定した名称を指定
+    key     = "tastylog-dev.tfstate"              # 開発環境用のxxx.tfstate（任意の名称を設定）
+    region  = "ap-northeast-1"                    # S3バケットを作成したリージョンを指定
+    profile = "teraform_user"                     # profileで設定しているユーザを指定(cat ~/.aws/configで確認)
+  }
 }
 
 # ---------------------------
@@ -28,21 +34,4 @@ variable "project" {
 
 variable "environment" {
   type = string
-}
-
-# ---------------------------
-# VPC
-# ---------------------------
-resource "aws_vpc" "vpc" {
-  cidr_block                       = "192.168.0.0/20"
-  instance_tenancy                 = "default"
-  enable_dns_support               = true
-  enable_dns_hostnames             = true
-  assign_generated_ipv6_cidr_block = false
-
-  tags = {
-    Name    = "${var.project}-${var.environment}-vpc"
-    Project = var.project
-    Env     = var.environment
-  }
 }
