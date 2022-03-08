@@ -22,8 +22,9 @@ resource "aws_instance" "app_server" {
   instance_type = "t2.micro"
 
   # 2. NW設定
-  subnet_id                   = aws_subnet.public_subnet_1a.id # サブネットID
-  associate_public_ip_address = true                           # 自動割り当てパブリックID
+  subnet_id                   = aws_subnet.public_subnet_1a.id                # サブネットID
+  associate_public_ip_address = true                                          # 自動割り当てパブリックID
+  iam_instance_profile        = aws_iam_instance_profile.app_ec2_profile.name # IAMロールが関連付けられたインスタンスプロフィールをEC2に関連付け
   vpc_security_group_ids = [
     aws_security_group.app_sg.id,  # セキュリティグループID（APPサーバ用）
     aws_security_group.opmng_sg.id # セキュリティグループID（運用管理サーバ用）
